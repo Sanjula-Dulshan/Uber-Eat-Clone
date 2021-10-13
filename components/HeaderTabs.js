@@ -1,12 +1,45 @@
-import React from "react";
-import { View, Text, SafeAreaView } from "react-native";
-import SafeViewAndroid from "./SafeViewAndroid";
+import React, { useState } from "react";
+import { View, Text, SafeAreaView, TouchableOpacity } from "react-native";
 
 export default function HeaderTabs() {
+  const [activeTab, setActiveTab] = useState("Delivery");
   return (
-    <SafeAreaView style={SafeViewAndroid.AndroidSafeArea}>
-      <HeaderButton />
-    </SafeAreaView>
+    <View style={{ flexDirection: "row", alignSelf: "center" }}>
+      <HeaderButton
+        text="Delivery"
+        btnColor="black"
+        txtColor="white"
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+      />
+      <HeaderButton
+        text="Pickup"
+        btnColor="white"
+        txtColor="black"
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+      />
+    </View>
   );
 }
-const HeaderButton = () => <Text>Delivery</Text>;
+const HeaderButton = (props) => (
+  <TouchableOpacity
+    style={{
+      backgroundColor: props.activeTab === props.text ? "black" : "white",
+      paddingVertical: 6,
+      paddingHorizontal: 20,
+      borderRadius: 30,
+    }}
+    onPress={() => props.setActiveTab(props.text)}
+  >
+    <Text
+      style={{
+        color: props.activeTab === props.text ? "white" : "black",
+        fontSize: 15,
+        fontWeight: "bold",
+      }}
+    >
+      {props.text}
+    </Text>
+  </TouchableOpacity>
+);
