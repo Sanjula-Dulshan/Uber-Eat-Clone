@@ -1,6 +1,8 @@
 import React from "react";
 import { View, Text } from "react-native";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import AntDesign from "react-native-vector-icons/AntDesign";
 
 export default function SearchBar() {
   return (
@@ -13,6 +15,7 @@ export default function SearchBar() {
             borderRadius: 20,
             fontWeight: "700",
             marginTop: 7,
+            height: 40,
           },
           textInputContainer: {
             backgroundColor: "#eee",
@@ -22,6 +25,30 @@ export default function SearchBar() {
             marginRight: 10,
           },
         }}
+        renderLeftButton={() => (
+          <View style={{ marginLeft: 10 }}>
+            <Ionicons name="location-sharp" size={22} />
+          </View>
+        )}
+        renderRightButton={() => (
+          <View
+            style={{
+              flexDirection: "row",
+              marginRight: 10,
+              backgroundColor: "white",
+              padding: 7,
+              borderRadius: 30,
+              alignItems: "center",
+            }}
+          >
+            <AntDesign
+              name="clockcircle"
+              size={11}
+              style={{ marginRight: 6 }}
+            />
+            <Text>Search</Text>
+          </View>
+        )}
       />
     </View>
   );
