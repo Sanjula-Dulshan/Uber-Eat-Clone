@@ -32,25 +32,35 @@ export const localRestaurants = [
   },
 ];
 
-export default function RestaurantItem() {
+export default function RestaurantItems(props) {
   return (
-    <View style={{ marginTop: 10, padding: 15, backgroundColor: "white" }}>
-      <TouchableOpacity activeOpacity={1}>
-        {/* RestaurantImage */}
-        <RestaurantImage />
+    <TouchableOpacity activeOpacity={1}>
+      {props.restaurantData.map((restaurant, index) => (
+        <View
+          key={index}
+          style={{
+            marginTop: 10,
+            marginBottom: 20,
+            padding: 15,
+            backgroundColor: "white",
+          }}
+        >
+          {/* RestaurantImage */}
+          <RestaurantImage image={restaurant.image_url} />
 
-        {/* RestaurantInfo */}
-        <RestaurantInfo />
-      </TouchableOpacity>
-    </View>
+          {/* RestaurantInfo */}
+          <RestaurantInfo name={restaurant.name} rating={restaurant.rating} />
+        </View>
+      ))}
+    </TouchableOpacity>
   );
 }
 
-const RestaurantImage = () => (
+const RestaurantImage = (props) => (
   <>
     <Image
       source={{
-        uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmidfQ_ihLTZYKOOr_g4MUBbbIsw42Xdmzdw&usqp=CAU",
+        uri: props.image,
       }}
       style={{ width: "100%", height: 180 }}
     />
@@ -60,7 +70,7 @@ const RestaurantImage = () => (
   </>
 );
 
-const RestaurantInfo = () => (
+const RestaurantInfo = (props) => (
   <View
     style={{
       flexDirection: "row",
@@ -70,9 +80,7 @@ const RestaurantInfo = () => (
     }}
   >
     <View>
-      <Text style={{ fontSize: 15, fontWeight: "bold" }}>
-        Famhouse Kitchen Thai Cuisine
-      </Text>
+      <Text style={{ fontSize: 15, fontWeight: "bold" }}>{props.name}</Text>
       <Text style={{ fontSize: 13, color: "grey" }}>30-45 . min</Text>
     </View>
     <View
@@ -85,7 +93,7 @@ const RestaurantInfo = () => (
         borderRadius: 15,
       }}
     >
-      <Text>4.9</Text>
+      <Text>{props.rating}</Text>
     </View>
   </View>
 );
