@@ -7,6 +7,8 @@ import RestaurantItems, {
 } from "../components/RestaurantItems";
 import SafeViewAndroid from "../components/SafeViewAndroid";
 import SearchBar from "../components/SearchBar";
+import { Divider } from "react-native-elements";
+import BottomTabs from "../components/BottomTabs";
 
 const YELP_API_KEY =
   "p9LnUP0gMWHUrg72WZsr3gTsU36FmF8tzTeH2_ik80KGmUNydJX7zXm2PK3v4f5KWaxo5_WWblP5n6-2fP7TGxYOYjK0K6HvPPzRpn5LOabVZk7YQ2A_84WAfv52YXYx";
@@ -50,6 +52,8 @@ export default function Home() {
           <Categories />
           <RestaurantItems restaurantData={restaurantData} />
         </ScrollView>
+        <Divider width={1} />
+        <BottomTabs />
       </View>
     </SafeAreaView>
   );
