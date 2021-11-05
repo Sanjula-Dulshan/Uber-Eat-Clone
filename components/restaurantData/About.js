@@ -1,11 +1,22 @@
 import React from "react";
 import { View, Text, Image } from "react-native";
 
-const image =
-  "https://static.onecms.io/wp-content/uploads/sites/9/2020/04/24/ppp-why-wont-anyone-rescue-restaurants-FT-BLOG0420.jpg";
+const yelpRestaurantInfo = {
+  name: "Beachside Bar",
+  image:
+    "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmVzdGF1cmFudCUyMGludGVyaW9yfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80",
+  price: "$3",
+  reviews: "1500",
+  rating: 4.5,
+  categories: [{ title: "Indian" }, { title: "Comfort Food" }],
+};
 
-const title = "Farmhouse Kitchen Thai Cuisine";
-const description = "Thai  • Comfort Food  • $$   • 🎫 • ⭐";
+const { name, image, price, reviews, rating, categories } = yelpRestaurantInfo;
+
+const formattedCategories = categories.map((cat) => cat.title).join(" • ");
+const description = `${formattedCategories} ${
+  price ? " • " + price : ""
+}  • 🎫 • ${rating} ⭐  (${reviews}+)`;
 
 export default function About() {
   return (
@@ -14,7 +25,7 @@ export default function About() {
       <RestaurantImage image={image} />
 
       {/* RestaurantTitle */}
-      <RestaurantTitle title={title} />
+      <RestaurantName name={name} />
 
       {/* RestaurantDescription */}
       <RestaurantDescription description={description} />
@@ -26,7 +37,7 @@ const RestaurantImage = (props) => (
   <Image source={{ uri: props.image }} style={{ width: "100%", height: 180 }} />
 );
 
-const RestaurantTitle = (props) => (
+const RestaurantName = (props) => (
   <Text
     style={{
       fontSize: 29,
