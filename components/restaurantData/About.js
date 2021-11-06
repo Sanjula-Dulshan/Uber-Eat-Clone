@@ -6,18 +6,14 @@ export default function About(props) {
     props.route.params;
 
   const formattedCategories = categories.map((cat) => cat.title).join(" • ");
+
   const description = `${formattedCategories} ${
     price ? " • " + price : ""
-  }  • 🎫 • ${rating} ⭐  (${reviews}+)`;
+  } • 🎫 • ${rating} ⭐ (${reviews}+)`;
   return (
     <View>
-      {/* RestaurantImage */}
       <RestaurantImage image={image} />
-
-      {/* RestaurantTitle */}
       <RestaurantName name={name} />
-
-      {/* RestaurantDescription */}
       <RestaurantDescription description={description} />
     </View>
   );
@@ -36,17 +32,17 @@ const RestaurantName = (props) => (
       marginHorizontal: 15,
     }}
   >
-    {props.title}
+    {props.name}
   </Text>
 );
 
 const RestaurantDescription = (props) => (
   <Text
     style={{
-      fontSize: 15.5,
-      fontWeight: "400",
       marginTop: 10,
       marginHorizontal: 15,
+      fontWeight: "400",
+      fontSize: 15.5,
     }}
   >
     {props.description}
