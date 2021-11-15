@@ -1,9 +1,11 @@
-import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import { View, Text, TouchableOpacity, Modal } from "react-native";
 import { useSelector } from "react-redux";
 import numbro from "numbro";
 
 export default function ViewCart() {
+  const [modalVisible, setModalVisible] = useState(false);
+
   const { items } = useSelector((state) => state.cartReducer.selectedItems);
   const total = items
     .map((item) => Number(item.price.replace("$", "")))
@@ -14,9 +16,43 @@ export default function ViewCart() {
   //   currency: "USD",
   // });
   const totalUSD = numbro(total).formatCurrency({ mantissa: 2 });
-  console.log(totalUSD);
+
+  const checkoutModalContext = () => {
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: 30,
+        }}
+      >
+        <View
+          style={{
+            backgroundColor: "black",
+            padding: 10,
+            borderRadius: 30,
+            width: 150,
+            alignItems: "center",
+          }}
+        >
+          <TouchableOpacity onPress={() => setModalVisible(false)}>
+            <Text style={{ color: "white" }}>Checkout</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  };
   return (
     <>
+      <Modal
+        animationType="slide"
+        visible={modalVisible}
+        transparent={true}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        {checkoutModalContext()}
+      </Modal>
       {total ? (
         <View
           style={{
@@ -25,7 +61,7 @@ export default function ViewCart() {
             justifyContent: "center",
             flexDirection: "row",
             position: "absolute",
-            bottom: 120,
+            bottom: 40,
             zIndex: 999,
           }}
         >
@@ -46,8 +82,9 @@ export default function ViewCart() {
                 padding: 13,
                 borderRadius: 30,
                 width: 250,
-                position: "absolute",
+                position: "relative",
               }}
+              onPress={() => setModalVisible(true)}
             >
               <Text style={{ color: "white", fontSize: 20, marginRight: 20 }}>
                 View Cart
