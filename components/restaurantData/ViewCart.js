@@ -5,7 +5,7 @@ import numbro from "numbro";
 import OrderItem from "./OrderItem";
 import firebase from "../../firebase";
 
-export default function ViewCart() {
+export default function ViewCart({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
 
   const { items, restaurantName } = useSelector(
@@ -15,10 +15,6 @@ export default function ViewCart() {
     .map((item) => Number(item.price.replace("$", "")))
     .reduce((prev, curr) => prev + curr, 0);
 
-  // const totalUSD = total.toLocaleString("en", {
-  //   style: "currency",
-  //   currency: "USD",
-  // });
   const totalUSD = numbro(total).formatCurrency({ mantissa: 2 });
 
   const addOrderToFirebase = () => {
@@ -29,6 +25,7 @@ export default function ViewCart() {
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
     setModalVisible(false);
+    navigation.navigate("OrderCompleted");
   };
 
   const checkoutModalContext = () => {
