@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, Modal, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 import numbro from "numbro";
 import OrderItem from "./OrderItem";
+import firebase from "../../firebase";
 
 export default function ViewCart() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -19,6 +20,16 @@ export default function ViewCart() {
   //   currency: "USD",
   // });
   const totalUSD = numbro(total).formatCurrency({ mantissa: 2 });
+
+  const addOrderToFirebase = () => {
+    const db = firebase.firestore();
+    db.collection("orders").add({
+      items: items,
+      restaurantName: restaurantName,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+    setModalVisible(false);
+  };
 
   const checkoutModalContext = () => {
     return (
@@ -44,7 +55,9 @@ export default function ViewCart() {
                   width: 300,
                   position: "relative",
                 }}
-                onPress={() => setModalVisible(false)}
+                onPress={() => {
+                  addOrderToFirebase();
+                }}
               >
                 <Text style={{ color: "white", fontSize: 20 }}>Checkout</Text>
                 <Text
@@ -52,8 +65,8 @@ export default function ViewCart() {
                     position: "absolute",
                     right: 20,
                     color: "white",
-                    fontSize: 15,
-                    top: 17,
+                    fontSize: 18,
+                    top: 16,
                   }}
                 >
                   {total ? totalUSD : ""}
