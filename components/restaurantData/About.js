@@ -7,9 +7,8 @@ export default function About(props) {
 
   const formattedCategories = categories.map((cat) => cat.title).join(" • ");
 
-  const description = `${formattedCategories} ${
-    price ? " • " + price : ""
-  } • 🎫 • ${rating} ⭐ (${reviews}+)`;
+  const description = `${formattedCategories}
+Rating ${rating} ⭐ (${reviews}+)`;
   return (
     <View>
       <RestaurantImage image={image} />
