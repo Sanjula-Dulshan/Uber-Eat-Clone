@@ -5,7 +5,7 @@
 
 <p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=sanjula-dulshan" alt="sanjula-dulshan" /></a> </p>
 
-- About my project: [Uber eat clone](https://www.linkedin.com/posts/sanjula-dulshan-154329203_react-reactnative-redux-activity-6867493263813726208-BHye)
+- About my project: [Click Here](https://www.linkedin.com/posts/sanjula-dulshan-154329203_react-reactnative-redux-activity-6867493263813726208-BHye)
 
 - How to reach me **sdulshan10@gmail.com**
 
